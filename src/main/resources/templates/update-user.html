@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Update Pilot</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<div class="container-fluid">
+        <h2 th:text="'Hello! '+ ${user.username}"></h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Update
+                    </div>
+                    <div class="card-body">
+                        <div th:if="${param.error}">
+                            <span style="color: red">Invalid username or password</span>
+                        </div>
+ 							<form th:action="@{/user/updateUser}" method="POST">
+                          	  <div class="row form-group">
+                                <label class="col-sm-4">Password:</label>
+                                <input type="password" class="col-sm-8 form-control input-sm" name="password">
+                            </div>
+                          	  <div class="row form-group">
+                            	    <label class="col-sm-4">New Password:</label>
+                                	<input class="col-sm-8 form-control input-sm" name="newPassword" id="password" type="password" onkeyup='check();' />
+                          	  </div>
+                           	 <div class="row form-group">
+                                <label class="col-sm-4">Password:</label>
+                                <input class="col-sm-8 form-control input-sm" type="password" name="confirm_password" id="confirm_password"  onkeyup='check();' />
+                                <span id='message'></span>
+                            </div>
+                            <div class="row form-group">
+                            	<input type="hidden" name="username" th:value="${user.username}">
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+<script>
+var check = function() {
+	  if (document.getElementById('newPassword').value ==
+	    document.getElementById('confirm_password').value) {
+	    document.getElementById('message').style.color = 'green';
+	    document.getElementById('message').innerHTML = 'matching';
+	  } else {
+	    document.getElementById('message').style.color = 'red';
+	    document.getElementById('message').innerHTML = 'not matching';
+	  }
+	}
+</script>
+</body>
